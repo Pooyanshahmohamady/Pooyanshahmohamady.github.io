@@ -1,4 +1,9 @@
 ## سلام من پویان هستم تو زمینه آی تی و برق هوافضا و تجهیزات پزشکی کار میکنم👋
+Whatsapp iran:+989109514970
+Whatsapp usa:+18452750508
+telegram: t.me/pooyanshahmohamady
+Instagram: Instagram.com/pooyanshahmohamady
+website: https://www.shahmohamady.ir
 
 <!--
 **Pooyanshahmohamady/Pooyanshahmohamady** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
