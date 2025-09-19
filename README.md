@@ -1,24 +1,29 @@
+<!doctype html>
+
 <html lang="fa" dir="rtl">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Pooyan — Links</title>
   <meta name="description" content="Official links of Pooyan Shahmohamady" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
     :root{--bg:#0f1724;--card:#0b1220;--accent:#06b6d4;--text:#e6eef6}
     *{box-sizing:border-box}
     html,body{margin:0;padding:0}
-    body{min-height:100svh;font-family:system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial;background:linear-gradient(180deg,#031024 0%, #071428 100%);color:var(--text)}
+    body{min-height:100svh;font-family:'Inter',system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial;background:linear-gradient(180deg,#031024 0%, #071428 100%);color:var(--text)}
+    html[dir="rtl"] body{font-family:'Vazirmatn','Inter',system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial}
     .wrap{max-width:920px;margin:16px auto 40px;border-radius:16px;background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));box-shadow:0 6px 30px rgba(2,6,23,0.6)}/* Header */
 .header{position:sticky;top:0;z-index:10;backdrop-filter:blur(6px);background:linear-gradient(180deg,rgba(3,16,36,0.9),rgba(7,20,40,0.85));border-top-left-radius:16px;border-top-right-radius:16px;border-bottom:1px solid rgba(255,255,255,0.06)}
-.header-inner{display:flex;align-items:center;gap:16px;padding:14px 16px}
+.header-inner{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px;padding:14px 16px}
 .brand{display:flex;gap:16px;align-items:center}
 .avatar{width:56px;height:56px;border-radius:14px;background:linear-gradient(135deg,var(--accent),#7c3aed);display:flex;align-items:center;justify-content:center;font-weight:700;color:#001}
 h1{margin:0;font-size:18px}
 .sub{margin:2px 0 0;color:rgba(230,238,246,0.75);font-size:13px}
 
 /* Lang switcher */
-.spacer{flex:1}
 .lang{display:flex;align-items:center;gap:8px}
 .select{appearance:none;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);color:var(--text);padding:8px 12px;border-radius:10px;cursor:pointer}
 
@@ -46,7 +51,6 @@ h1{margin:0;font-size:18px}
             <p class="sub" id="subtitle">Official links</p>
           </div>
         </div>
-        <div class="spacer"></div>
         <div class="lang">
           <label class="small" id="langLabel" for="langSel">زبان:</label>
           <select id="langSel" class="select" aria-label="Language">
@@ -90,7 +94,7 @@ h1{margin:0;font-size:18px}
     const i18n = {
       fa: {
         dir: 'rtl',
-        title: 'Pooyan Shahmohamady',
+        title: 'پویان شاه محمدی',
         subtitle: 'لینک‌های رسمی',
         langLabel: 'زبان:',
         labels: {
@@ -121,6 +125,7 @@ h1{margin:0;font-size:18px}
       const t = i18n[lang] || i18n.fa;
       document.documentElement.lang = lang;
       document.documentElement.dir = t.dir;
+      document.body.style.fontFamily = (t.dir === 'rtl') ? "Vazirmatn, Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial" : "Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial";
       $('#title').textContent = t.title;
       $('#subtitle').textContent = t.subtitle;
       $('#langLabel').textContent = t.langLabel;
@@ -131,9 +136,9 @@ h1{margin:0;font-size:18px}
         const a = document.createElement('a');
         a.className='btn';
         a.href=item.href; a.target='_blank'; a.rel='noopener';
-        a.innerHTML = `<span class="icon">${item.icon}</span>
+        a.innerHTML = `<span class=\"icon\">${item.icon}</span>
           <div><div>${t.labels[item.id]||item.id}</div>
-          <div class="small">${item.small[lang]||''}</div></div>`;
+          <div class=\"small\">${item.small[lang]||''}</div></div>`;
         grid.appendChild(a);
       });
 
@@ -143,7 +148,9 @@ h1{margin:0;font-size:18px}
     const sel = $('#langSel');
     sel.addEventListener('change', e=> render(e.target.value));
 
-    const saved = localStorage.getItem('lang') || (navigator.language||'fa').startsWith('fa') ? 'fa' : 'en';
+    const userLang = (navigator.language||'fa').toLowerCase();
+    let saved = localStorage.getItem('lang');
+    if(!saved){ saved = userLang.startsWith('fa') ? 'fa' : userLang.startsWith('ru') ? 'ru' : 'en'; }
     sel.value = saved;
     render(sel.value);
   </script></body>
